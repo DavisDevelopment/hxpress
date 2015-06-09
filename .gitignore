@@ -1,0 +1,6 @@
+
+# Build Results
+dist/*
+
+# Swap Files
+*.swp
