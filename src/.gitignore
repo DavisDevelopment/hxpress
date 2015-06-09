@@ -1,0 +1,9 @@
+# Test Class
+Test.hx
+
+# Build Files
+*.hxml
+
+# Make File
+Makefile
+makefile
