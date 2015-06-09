@@ -11,9 +11,11 @@ import haxe.extern.Rest;
 extern class Server extends EventEmitter {
 /* === Instance Methods === */
 
-	@:overload(function(p:LHandle, ?bl:Int, ?cb:Function):Void{})
-	@:overload(function(p:LHandle, ?cb:Function):Void{})
-	function listen(port:LHandle, ?hostname:String, ?backlog:Int, ?callback:Function):Void;
+	@:overload(function(p:Int, ?bl:Int, ?cb:Function):Void{})
+	@:overload(function(p:Int, ?cb:Function):Void{})
+	@:overload(function(p:String, ?cb:Function):Void{})
+	@:overload(function(p:Dynamic, ?cb:Function):Void{})
+	function listen(port:Int, ?hostname:String, ?backlog:Int, ?callback:Function):Void;
 
 	function close(?callback:Function):Void;
 
@@ -24,5 +26,3 @@ extern class Server extends EventEmitter {
 	var maxHeadersCount : Int;
 	var timeout : Int;
 }
-
-private typedef LHandle = EitherType<Int, EitherType<String, Object>>;
