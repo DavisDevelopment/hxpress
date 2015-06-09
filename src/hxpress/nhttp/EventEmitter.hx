@@ -1,4 +1,4 @@
-package hxpress.http;
+package hxpress.nhttp;
 
 import haxe.Constraints.Function;
 import haxe.extern.Rest;

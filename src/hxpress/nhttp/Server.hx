@@ -1,6 +1,6 @@
-package hxpress.http;
+package hxpress.nhttp;
 
-import hxpress.http.EventEmitter;
+import hxpress.nhttp.EventEmitter;
 
 import tannus.ds.Object;
 import haxe.Constraints.Function;

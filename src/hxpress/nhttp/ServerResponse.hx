@@ -1,6 +1,6 @@
-package hxpress.http;
+package hxpress.nhttp;
 
-import hxpress.http.EventEmitter;
+import hxpress.nhttp.EventEmitter;
 
 import haxe.Constraints.Function;
 import haxe.extern.EitherType;

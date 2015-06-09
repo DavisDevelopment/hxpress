@@ -1,4 +1,4 @@
-package hxpress.http;
+package hxpress.nhttp;
 
 import haxe.Constraints.Function;
 import haxe.extern.EitherType;
@@ -6,7 +6,7 @@ import haxe.extern.Rest;
 
 import tannus.ds.Object;
 import tannus.sys.Path;
-import hxpress.http.EventEmitter;
+import hxpress.nhttp.EventEmitter;
 
 @:jsRequire('http', 'IncomingMessage')
 extern class IncomingMessage extends EventEmitter {

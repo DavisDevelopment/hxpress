@@ -1,6 +1,6 @@
-package hxpress.http;
+package hxpress.nhttp;
 
-import hxpress.http.*;
+import hxpress.nhttp.*;
 import haxe.Constraints.Function;
 
 @:jsRequire('http')
