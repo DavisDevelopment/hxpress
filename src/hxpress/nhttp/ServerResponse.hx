@@ -1,13 +1,13 @@
 package hxpress.nhttp;
 
-import hxpress.nhttp.EventEmitter;
+import hxpress.http.EventEmitter;
 
 import haxe.Constraints.Function;
 import haxe.extern.EitherType;
 import haxe.extern.Rest;
 
 import tannus.ds.Object;
-import tannus.internal.Node.NodeBuffer in Buff;
+import tannus.node.Buffer in Buff;
 
 @:jsRequire('http', 'ServerResponse')
 extern class ServerResponse extends EventEmitter {
@@ -41,4 +41,4 @@ extern class ServerResponse extends EventEmitter {
 	var sendDate : Bool;
 }
 
-private typedef Data = EitherType<String, Buff>;
+private typedef Data = Buff;
