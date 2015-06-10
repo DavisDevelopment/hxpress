@@ -6,10 +6,11 @@ import haxe.extern.Rest;
 
 import tannus.ds.Object;
 import tannus.sys.Path;
+import tannus.node.ReadableStream;
 import hxpress.nhttp.EventEmitter;
 
 @:jsRequire('http', 'IncomingMessage')
-extern class IncomingMessage extends EventEmitter {
+extern class IncomingMessage extends ReadableStream {
 /* === Instance Fields === */
 	var httpVersion : String;
 	
