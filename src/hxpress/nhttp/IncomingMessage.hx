@@ -7,6 +7,7 @@ import haxe.extern.Rest;
 import tannus.ds.Object;
 import tannus.sys.Path;
 import tannus.node.ReadableStream;
+import tannus.node.Socket;
 import hxpress.nhttp.EventEmitter;
 
 @:jsRequire('http', 'IncomingMessage')
@@ -21,6 +22,7 @@ extern class IncomingMessage extends ReadableStream {
 
 	var method : Null<String>;
 	var url : Null<Path>;
+	var socket : Socket;
 
 /* === Instance Methods === */
 
