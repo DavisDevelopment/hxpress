@@ -4,7 +4,9 @@ import hxpress.nhttp.*;
 import haxe.Constraints.Function;
 import haxe.extern.EitherType;
 import haxe.extern.Rest;
+
 import tannus.ds.Object;
+import tannus.node.Buffer;
 
 @:jsRequire('http', 'ClientRequest')
 extern class ClientRequest extends EventEmitter {
@@ -12,11 +14,11 @@ extern class ClientRequest extends EventEmitter {
 
 	function flushHeaders():Void;
 
-	@:overload(function(chunk:Data, ?cb:Function):Void{})
-	function write(chunk:Data, ?encoding:String, ?callback:Function):Void;
+	@:overload(function(chunk:Buffer, ?cb:Function):Void{})
+	function write(chunk:Buffer, ?encoding:String, ?callback:Function):Void;
 
-	@:overload(function(?chunk:Data, ?cb:Function):Void{})
-	function end(?data:Data, ?encoding:String, ?callback:Function):Void;
+	@:overload(function(?chunk:Buffer, ?cb:Function):Void{})
+	function end(?data:Buffer, ?encoding:String, ?callback:Function):Void;
 
 	function abort():Void;
 

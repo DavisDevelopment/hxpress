@@ -1,10 +1,11 @@
 package hxpress.http;
 
 import hxpress.nhttp.IncomingMessage in Msg;
-import hxpress.util.Buffer;
+import tannus.node.Buffer;
 
 import tannus.ds.Object;
 import tannus.ds.Maybe;
+import tannus.ds.Dict;
 import tannus.io.ByteArray;
 import tannus.node.Url;
 
@@ -41,6 +42,19 @@ abstract IncomingMessage (Msg) from Msg to Msg {
 	public var params(get, never):Object;
 	private inline function get_params():Object {
 		return url.query;
+	}
+
+	/**
+	  * The HTTP Headers of [this] request, as a Dict
+	  */
+	public var headerDict(get, never):Dict<String, String>;
+	private function get_headerDict() {
+		var d:Dict<String, String> = new Dict();
+		var h:Object = this.headers;
+		for (key in h.keys) {
+			d[key] = h[key];
+		}
+		return d;
 	}
 
 /* === Instance Methods === */

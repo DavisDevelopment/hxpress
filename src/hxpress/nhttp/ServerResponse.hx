@@ -7,7 +7,7 @@ import haxe.extern.EitherType;
 import haxe.extern.Rest;
 
 import tannus.ds.Object;
-import tannus.node.Buffer in Buff;
+import tannus.internal.Node.NodeBuffer in Buff;
 
 @:jsRequire('http', 'ServerResponse')
 extern class ServerResponse extends EventEmitter {
@@ -41,4 +41,4 @@ extern class ServerResponse extends EventEmitter {
 	var sendDate : Bool;
 }
 
-private typedef Data = Buff;
+private typedef Data = EitherType<String, Buff>;

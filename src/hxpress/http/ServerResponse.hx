@@ -22,7 +22,7 @@ abstract ServerResponse (NRes) from NRes to NRes {
 	/**
 	  * Write some data to [this] response
 	  */
-	public inline function write(chunk:ByteArray, ?enc:String, ?cb:Void->Void):Void {
+	public function write(chunk:ByteArray, ?enc:String, ?cb:Void->Void):Void {
 		this.write(chunk, enc, cb);
 	}
 
