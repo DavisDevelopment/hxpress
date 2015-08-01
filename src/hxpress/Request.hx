@@ -47,16 +47,42 @@ class Request {
 	private function load():Void {
 		if (method == 'POST') {
 			req.data(function(pb : ByteArray) {
-				var pdata:Object = Qs.parse( pb );
+				var postType:ContentType = parseContentType(headers['content-type']);
+				
+				switch (postType.name) {
+					/* This is the default, so everything is OK */
+					case 'application/x-www-form-urlencoded':
+						var pdata:Object = Qs.parse( pb );
+						params.write( pdata );
+						ready.call( this );
 
-				params.write( pdata );
-				ready.call( this );
+					default:
+						throw 'Unexpected Content-Type "${postType.name}"!';
+				}
 			});
 		}
 		else {
 			
 			ready.call( this );
 		}
+	}
+
+	/**
+	  * Parse the 'content-type' value
+	  */
+	private function parseContentType(t : String):ContentType {
+		var pars:Map<String, String> = new Map();
+		var ct:ContentType = {
+			'name': '',
+			'params': pars 
+		};
+		var bits:Array<String> = t.split(' ');
+		ct.name = bits.shift().replace(';', '');
+		for (rem in bits) {
+			var pair:Array<String> = rem.replace(';', '').split('=');
+			ct.params[pair[0]] = pair[1];
+		}
+		return ct;
 	}
 
 /* === Computed Instance Fields === */
@@ -106,3 +132,8 @@ class Request {
 	//- Signal fired when all desired data has been obtained for [this] Request
 	public var ready : Signal<Request>;
 }
+
+private typedef ContentType = {
+	var name : String;
+	var params : Map<String, String>;
+};
