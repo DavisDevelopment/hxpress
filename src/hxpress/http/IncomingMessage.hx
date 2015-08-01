@@ -79,4 +79,11 @@ abstract IncomingMessage (Msg) from Msg to Msg {
 			cb( buff );
 		});
 	}
+
+	/**
+	  * Listen for the 'readable' Event on [this] Message
+	  */
+	public function onreadable(cb : Void->Void):Void {
+		this.on('readable', cb);
+	}
 }
