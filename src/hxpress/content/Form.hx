@@ -2,6 +2,7 @@ package hxpress.content;
 
 import hxpress.content.Content;
 import tannus.xml.Elem;
+import Std.*;
 
 using hxpress.content.ElemTools;
 
@@ -11,9 +12,6 @@ class Form extends Content {
 		super();
 
 		el = elem('form');
-		idiv = elem('div', el);
-		idiv.addClass('block-center');
-
 		fields = new Array();
 
 		on('pack', function(x) {
@@ -53,6 +51,20 @@ class Form extends Content {
 	}
 
 /* === Computed Instance Fields === */
+
+	/**
+	  * The 'method' of [this] Form
+	  */
+	public var method(get, set):String;
+	private function get_method() return string(el.attr['method']);
+	private function set_method(nm) return (el.attr['method'] = nm);
+
+	/**
+	  * The 'action' of [this] Form
+	  */
+	public var action(get, set):String;
+	private function get_action() return string(el.attr['action']);
+	private function set_action(na) return (el.attr['action'] = na);
 
 /* === Instance Fields === */
 
