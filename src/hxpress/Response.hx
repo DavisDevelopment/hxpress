@@ -25,12 +25,20 @@ class Response {
 /* === Instance Methods === */
 
 	/**
+	  * Send a REDIRECT
+	  */
+	public function redirect(path : String):Void {
+		status = 302;
+		headers['Location'] = path;
+	}
+
+	/**
 	  * Write some data to [this] Response
 	  */
 	public function write(chunk : ByteArray):Void {
 		var w:Getter<ByteArray->Void> = Getter.create(buffering?res_bod.append:untyped res.write);
 		
-		w.value( chunk );
+		w.v( chunk );
 	}
 
 	/**
