@@ -3,6 +3,7 @@ package hxpress;
 import hxpress.http.Server in NServ;
 import hxpress.http.IncomingMessage in NReq;
 import hxpress.http.ServerResponse in NRes;
+import hxpress.core.PathCheck;
 import hxpress.core.RequestManager;
 import hxpress.core.Router;
 import hxpress.Request;
@@ -60,7 +61,7 @@ class Server implements RequestManager {
 	/**
 	  * Add a new Callback to the list
 	  */
-	public function route(path:String, cb:ServerCallback):Void {
+	public function route(path:PathCheck, cb:ServerCallback):Void {
 		router.addRoute(path, cb);
 	}
 
