@@ -2,7 +2,7 @@ package hxpress.core;
 
 import hxpress.Request;
 import hxpress.Response;
-import hxpress.core.PathDescriptor;
+import hxpress.core.PathCheck;
 import hxpress.core.Route;
 
 import tannus.io.Signal2;
@@ -28,24 +28,32 @@ class Router {
 	private function inbound(req:Request, res:Response):Void {
 		var path:String = req.url.pathname;
 
+		var handled:Bool = false;
 		for (r in routes) {
-			if (r.glob.test(path)) {
+			if (r.glob.validate(path)) {
 				r.signal.call(req, res);
+				handled = true;
 			}
+		}
+		if (!handled) {
+			res.status = 404;
+			res.send();
 		}
 	}
 
 	/**
 	  * Create a new Route
 	  */
-	public function addRoute(desc:String, cb:Request->Response->Void):Void {
-		var sig:NetSignal = getSignal( desc );
-		sig.on( cb );
+	public function addRoute(desc:PathCheck, cb:Request->Response->Void):Void {
+		var rout:Route = new Route( desc );
+		rout.signal.on( cb );
+		routes.push( rout );
 	}
 
 	/**
 	  * Get the NetSignal associated with a given path-descriptor
 	  */
+	/*
 	private function getSignal(desc : String):NetSignal {
 		for (r in routes)
 			if (r.glob.str == desc)
@@ -54,6 +62,7 @@ class Router {
 		routes.push( rout );
 		return rout.signal;
 	}
+	*/
 
 /* === Instance Fields === */
 
