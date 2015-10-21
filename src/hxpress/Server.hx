@@ -18,6 +18,7 @@ import tannus.ds.AsyncStack;
 import tannus.ds.Dict;
 import tannus.ds.Object;
 import tannus.ds.Maybe;
+import tannus.sys.GlobStar;
 
 class Server implements RequestManager {
 	/* Constructor Function */
@@ -61,8 +62,8 @@ class Server implements RequestManager {
 	/**
 	  * Add a new Callback to the list
 	  */
-	public function route(path:PathCheck, cb:ServerCallback):Void {
-		router.addRoute(path, cb);
+	public function route(path:String, cb:ServerCallback):Void {
+		router.addRoute(new GlobStar(path), cb);
 	}
 
 	/**

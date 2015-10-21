@@ -2,11 +2,12 @@ package hxpress.core;
 
 import hxpress.Request;
 import hxpress.Response;
-import hxpress.core.PathCheck;
 import hxpress.core.Route;
 
 import tannus.io.Signal2;
+import tannus.ds.Object;
 import tannus.sys.Path;
+import tannus.sys.GlobStar;
 
 import haxe.ds.ArraySort.sort;
 
@@ -30,7 +31,9 @@ class Router {
 
 		var handled:Bool = false;
 		for (r in routes) {
-			if (r.glob.validate(path)) {
+			var match:Null<Object> = r.glob.match(path);
+			if (r.glob.test(path)) {
+				req.params += match;
 				r.signal.call(req, res);
 				handled = true;
 			}
@@ -44,7 +47,7 @@ class Router {
 	/**
 	  * Create a new Route
 	  */
-	public function addRoute(desc:PathCheck, cb:Request->Response->Void):Void {
+	public function addRoute(desc:GlobStar, cb:Request->Response->Void):Void {
 		var rout:Route = new Route( desc );
 		rout.signal.on( cb );
 		routes.push( rout );
