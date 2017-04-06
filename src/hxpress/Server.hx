@@ -3,7 +3,6 @@ package hxpress;
 import hxpress.http.Server in NServ;
 import hxpress.http.IncomingMessage in NReq;
 import hxpress.http.ServerResponse in NRes;
-import hxpress.core.PathCheck;
 import hxpress.core.RequestManager;
 import hxpress.core.Router;
 import hxpress.Request;
@@ -69,7 +68,7 @@ class Server implements RequestManager {
 	/**
 	  * Start listening on the specified port
 	  */
-	public function listen(port : Int):Void {
+	public function listen(port:Int):Void {
 		server.listen( port );
 	}
 

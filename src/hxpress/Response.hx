@@ -36,9 +36,12 @@ class Response {
 	  * Write some data to [this] Response
 	  */
 	public function write(chunk : ByteArray):Void {
-		var w:Getter<ByteArray->Void> = Getter.create(buffering?res_bod.append:untyped res.write);
-		
-		w.v( chunk );
+		if ( buffering ) {
+		    res_bod.append( chunk );
+		}
+        else {
+            res.write( chunk );
+        }
 	}
 
 	/**
@@ -76,6 +79,17 @@ class Response {
 
 			res.writeHead(status, headers);
 		}
+	}
+
+	/**
+	  * End [this] Response
+	  */
+	public inline function end():Void {
+	    res.end();
+	}
+
+	public inline function getRaw():Res {
+	    return res;
 	}
 
 /* === Computed Instance Fields === */

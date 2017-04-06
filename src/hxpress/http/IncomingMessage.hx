@@ -52,7 +52,7 @@ abstract IncomingMessage (Msg) from Msg to Msg {
 		var d:Dict<String, String> = new Dict();
 		var h:Object = this.headers;
 		for (key in h.keys) {
-			d[key] = h[key];
+			d[key.toLowerCase()] = h[key];
 		}
 		return d;
 	}

@@ -9,6 +9,7 @@ import tannus.ds.Maybe;
 import tannus.sys.File;
 import tannus.sys.Path;
 import tannus.sys.Mimes;
+import tannus.sys.Mime;
 
 @:forward
 abstract ServerResponse (NRes) from NRes to NRes {
@@ -23,30 +24,33 @@ abstract ServerResponse (NRes) from NRes to NRes {
 	  * Write some data to [this] response
 	  */
 	public function write(chunk:ByteArray, ?enc:String, ?cb:Void->Void):Void {
-		this.write(chunk, enc, cb);
+		this.write(chunk.getData(), enc, cb);
 	}
 
 	/**
 	  * Write the contents of a given file
 	  */
 	public function sendFile(path : Path):Void {
-		if (!this.headersSent) {
-			var mime:Maybe<String> = Mimes.getMimeType(path.extension);
-			var f:File = path;
+		if ( !this.headersSent ) {
+			var mime:Maybe<Mime> = Mimes.getMimeType( path.extension );
+			var f:File = new File( path );
 
-			if (f.exists) {
+			if ( f.exists ) {
 				this.writeHead(200, {
-					'content-type'  : (mime || 'text/plain'),
+					'content-type'  : mime.or( 'text/plain' ),
 					'content-length': f.size
 				});
 
 				write(f.read());
 
 				this.end();
-			} else {
+			} 
+			else {
 				this.writeHead(404, 'Fuck You');
 				this.end();
 			}
-		} else throw 'Cannot set headers after they have been sent';
+		} else {
+		    throw 'Cannot set headers after they have been sent';
+        }
 	}
 }

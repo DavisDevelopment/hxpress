@@ -49,7 +49,7 @@ class Request {
 			req.data(function(pb : ByteArray) {
 				var postType:ContentType = parseContentType(headers['content-type']);
 				
-				switch (postType.name) {
+				switch ( postType.name ) {
 					/* This is the default, so everything is OK */
 					case 'application/x-www-form-urlencoded':
 						var pdata:Object = Qs.parse( pb );

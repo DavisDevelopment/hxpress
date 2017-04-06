@@ -21,7 +21,7 @@ extern class IncomingMessage extends ReadableStream {
 	var rawTrailers : Array<String>;
 
 	var method : Null<String>;
-	var url : Null<Path>;
+	var url : Null<String>;
 	var socket : Socket;
 
 /* === Instance Methods === */
